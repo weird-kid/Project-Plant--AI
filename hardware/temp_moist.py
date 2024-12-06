@@ -1,6 +1,10 @@
 import smbus2
 import time
+import keyboard
 
+print("Remember: I2C has to be enabled in Raspi-config")
+time.sleep(5)
+print('Press "q" key to stop program')
 # Define the I2C bus
 bus = smbus2.SMBus(1)  # 1 indicates /dev/i2c-1
 
@@ -29,9 +33,11 @@ def main():
     aht10_init()
     while True:
         data = aht10_measure()
+        if keyboard.is_pressed('q'):
+            break
         humidity, temperature = parse_data(data)
-        print(f"Humidity: {humidity:.2f}%")
-        print(f"Temperature: {temperature:.2f}°C")
+        print(f"Humidity: {humidity}%",end="\t")
+        print(f"Temperature: {temperature}°C")
         time.sleep(2)  # Read data every 2 seconds
 
 if __name__ == "__main__":
