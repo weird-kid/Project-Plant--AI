@@ -1,0 +1,7 @@
+
+Type "pip list" on terminal and check for following packages:
+
+	gpiozero
+	keyboard
+	smdbus
+	smdbus2
