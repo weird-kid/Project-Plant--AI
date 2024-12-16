@@ -5,19 +5,19 @@ import time
 bus = smbus2.SMBus(1)  # 1 indicates /dev/i2c-1
 
 # AHT10 address and commands
-AHT10_ADDRESS = 0x38
-AHT10_CMD_INIT = [0xE1, 0x08, 0x00]
-AHT10_CMD_MEASURE = [0xAC, 0x33, 0x00]
-AHT10_CMD_SOFT_RESET = [0xBA]
+HT_ADDRESS = 0x38
+HT_CMD_INIT = [0xE1, 0x08, 0x00]
+HT_CMD_MEASURE = [0xAC, 0x33, 0x00]
+HT_CMD_SOFT_RESET = [0xBA]
 
-def aht10_init():
-    bus.write_i2c_block_data(AHT10_ADDRESS, 0x00, AHT10_CMD_INIT)
+def temp_init():
+    bus.write_i2c_block_data(HT_ADDRESS, 0x00, HT_CMD_INIT)
     time.sleep(0.05)  # Wait for initialization
 
-def aht10_measure():
-    bus.write_i2c_block_data(AHT10_ADDRESS, 0x00, AHT10_CMD_MEASURE)
+def temp_measure():
+    bus.write_i2c_block_data(HT_ADDRESS, 0x00, HT_CMD_MEASURE)
     time.sleep(0.1)  # Wait for measurement to complete
-    data = bus.read_i2c_block_data(AHT10_ADDRESS, 0x00, 6)
+    data = bus.read_i2c_block_data(HT_ADDRESS, 0x00, 6)
     return data
 
 def parse_data(data):
@@ -26,8 +26,8 @@ def parse_data(data):
     return humidity, temperature
 
 def main():
-    aht10_init()
-    data = aht10_measure()
+    temp_init()
+    data = temp_measure()
     humidity, temperature = parse_data(data)
     humidity = int(humidity)
     temperature = int(temperature)
