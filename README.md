@@ -5,7 +5,7 @@ Description:
 Working:
   All sensors, Actuators and a Pi cam are connected to Raspberry Pi 4, where a background server is hosted.
   A GPU intensive cloud server runs Yolo's Objection Detection AI model to track dieases on Plant leaves.
-  All the information is displayed on another webserver, which provides a UI, for users to check on their 
+  All the information is displayed on another Django-based web Server, which provides a UI, for users to check on their 
   plant.
   
 
